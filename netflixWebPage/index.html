@@ -15,7 +15,12 @@
         <nav>
             <span><img width="53" src="assets/images/logo.svg" alt=""></span>
             <div>
-                <button class="btn">English</button>
+                <div class="language-select">
+                    <button class="btn btn-language" onclick="toggleDropdown()">English</button>
+                    <div class="dropdown-content" id="languageDropdown">
+                        <button>Hindi</button>
+                    </div>
+                </div>
                 <button class="btn btn-red-sm">Sign In</button>
             </div>
         </nav>
@@ -31,7 +36,6 @@
             </div>
         </div>
 
-        <div class="separation"></div>
 
     </div>
 
@@ -47,7 +51,6 @@
                 autoplay loop muted></video>
         </div>
     </section>
-    <div class="separation"></div>
 
     <section class="first second">
 
@@ -61,7 +64,6 @@
         </div>
     </section>
 
-    <div class="separation"></div>
     <section class="first third">
         <div>
             <span>Watch everywhere</span>
@@ -74,7 +76,6 @@
                 autoplay loop muted></video>
         </div>
     </section>
-    <div class="separation"></div>
 
 
     <section class="first second">
@@ -91,43 +92,9 @@
         </div>
     </section>
 
-    <div class="separation"></div>
 
-    <section class="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faqbox">
-            <span>What is NetFlix</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4V20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M4 12H20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+    <div id="faq-root"></div>
 
-        </div>
-        <div class="faqbox">
-            <span>How much does Netflix cost?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4V20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M4 12H20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-
-        </div>
-        <div class="faqbox">
-            <span>What can I watch on Netflix?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4V20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M4 12H20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-
-        </div>
-        <div class="faqbox">
-            <span>Where can I watch?</span>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4V20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M4 12H20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-
-        </div>
-    </section>
     <div class="separation"></div>
 
     <footer>
@@ -163,6 +130,35 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel" src="react.js"></script>
+    <script type="text/babel">
+        ReactDOM.render(
+            <FAQSection />,
+            document.getElementById('faq-root')
+        );
+    </script>
+    <script>
+        function toggleDropdown() {
+            document.getElementById("languageDropdown").classList.toggle("show");
+        }
+
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.btn-language')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

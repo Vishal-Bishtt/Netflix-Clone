@@ -29,12 +29,13 @@ body {
 }
 
 nav {
-    max-width: 60vw;
+    max-width: 90vw;
     justify-content: space-between;
     margin: auto;
     display: flex;
     align-items: center;
     height: 100px;
+    padding: 0 20px;
 }
 
 nav img {
@@ -42,6 +43,7 @@ nav img {
     width: 130px;
     position: relative;
     z-index: 10;
+    margin-left: -10px;  /* Add negative margin to shift logo left */
 }
 
 nav button {
@@ -96,7 +98,18 @@ nav button {
     border-radius: 4px;
     border: 1px solid white;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.95);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .btn-red {
@@ -106,11 +119,37 @@ nav button {
     font-size: 20px;
     border-radius: 4px;
     font-weight: 400;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-red:hover {
+    background-color: #e50914;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.btn-red:active {
+    transform: scale(0.95);
+    background-color: #b2070f;
 }
 
 .btn-red-sm {
     background-color: red;
     color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-red-sm:hover {
+    background-color: #e50914;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.btn-red-sm:active {
+    transform: scale(0.95);
+    background-color: #b2070f;
 }
 
 .hero-buttons {
@@ -139,7 +178,55 @@ nav button {
     align-items: center;
 }
 
+.language-select {
+    position: relative;
+    display: inline-block;
+    pointer-events: none; /* Disable hover interactions */
+}
 
+.btn-language {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    pointer-events: auto; /* Re-enable interactions for the button only */
+}
+
+.btn-language::after {
+    content: '▼';
+    font-size: 10px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    min-width: 80px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 11;
+    border-radius: 4px;
+    margin-top: 5px;
+    pointer-events: auto; /* Re-enable interactions for dropdown content */
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content button {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .secImg {
     position: relative;
@@ -187,25 +274,52 @@ section.first>div :nth-child(2) {
     padding: 34px;
 }
 
-.faqbox:hover {
-    background-color: #414141;
-    color: white;
-}
-
-.faqbox svg {
-    filter: invert(1);
-}
-
 .faqbox {
-    transition: all 1s ease-out;
+    transition: all 0.3s ease-out;
     font-size: 24px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     background-color: #2d2d2d;
     padding: 24px;
     max-width: 60vw;
     margin: 34px auto;
     cursor: pointer;
+    position: relative;
+}
+
+.faqbox:hover {
+    background-color: #414141;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.faqbox svg {
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+.faqbox.expanded svg {
+    transform: rotate(45deg);
+}
+
+.faqbox .answer {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #fff;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+}
+
+.faqbox.expanded .answer {
+    max-height: 300px;
+    opacity: 1;
+    border-top: 1px solid #414141;
+    padding-top: 20px;
 }
 
 footer {
@@ -217,13 +331,36 @@ footer {
 
 footer .questions {
     padding: 34px 0;
+    color: #b3b3b3;
 }
 
+footer .questions:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
 .footer {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color: white;
+}
+
+.footer a {
+    font-size: 14px;
+    color: #b3b3b3;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+    color: white;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
 }
 
 
@@ -292,16 +429,4 @@ footer .questions {
         grid-template-columns: 1fr 1fr;
         gap: 25px;
     }
-}
-
-
-.footer a {
-    font-size: 14px;
-    color: white;
-}
-
-.footer-item {
-    display: flex;
-    flex-direction: column;
-    gap: 23px;
 }
