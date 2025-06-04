@@ -93,7 +93,9 @@
     </section>
 
 
-    <div id="faq-root"></div>
+    <div id="faq-root" class="faq">
+        <h2>Frequently Asked Questions</h2>
+    </div>
 
     <div class="separation"></div>
 
@@ -102,14 +104,14 @@
             Questions? Call 000-800-919-1694
         </div>
         <div class="footer">
-            <div class="footer-item"> 
+            <div class="footer-item">
                 <a href="faq">Investor Relations</a>
                 <a href="faq">Jobs</a>
                 <a href="faq">Ways to Watch</a>
                 <a href="faq">Terms of Use</a>
             </div>
 
-            <div class="footer-item"> 
+            <div class="footer-item">
                 <a href="faq">Help Centre</a>
                 <a href="faq">Account</a>
                 <a href="faq">Speed Test</a>
@@ -118,30 +120,65 @@
             <div class="footer-item">
                 <a href="faq">Media Centre</a>
                 <a href="faq">Privacy</a>
-                <a href="faq">Cookie Preferences</a> 
+                <a href="faq">Cookie Preferences</a>
                 <a href="faq">Corporate</a>
             </div>
 
             <div class="footer-item">
                 <a href="faq">Contact Us</a>
-                <a href="faq">Speed Test</a> 
-                <a href="faq">Legal Notices</a> 
+                <a href="faq">Speed Test</a>
+                <a href="faq">Legal Notices</a>
                 <a href="faq">Only on Netflix</a>
             </div>
         </div>
     </footer>
 
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script type="text/babel" src="react.js"></script>
-    <script type="text/babel">
-        ReactDOM.render(
-            <FAQSection />,
-            document.getElementById('faq-root')
-        );
-    </script>
     <script>
+        // FAQ Data
+        const faqData = [
+            {
+                question: "What is Netflix?",
+                answer: "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices."
+            },
+            {
+                question: "How much does Netflix cost?",
+                answer: "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from ₹ 149 to ₹ 649 a month. No extra costs, no contracts."
+            },
+            {
+                question: "What can I watch on Netflix?",
+                answer: "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want."
+            },
+            {
+                question: "Where can I watch?",
+                answer: "Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device."
+            }
+        ];
+
+        // Create FAQ Elements
+        const faqRoot = document.getElementById('faq-root');
+        faqData.forEach((item, index) => {
+            const faqBox = document.createElement('div');
+            faqBox.className = 'faqbox';
+            faqBox.innerHTML = `
+                <span>${item.question}</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 4V20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 12H20" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <div class="answer">${item.answer}</div>
+            `;
+
+            faqBox.addEventListener('click', () => {
+                const currentlyExpanded = document.querySelector('.faqbox.expanded');
+                if (currentlyExpanded && currentlyExpanded !== faqBox) {
+                    currentlyExpanded.classList.remove('expanded');
+                }
+                faqBox.classList.toggle('expanded');
+            });
+
+            faqRoot.appendChild(faqBox);
+        });
+
         function toggleDropdown() {
             document.getElementById("languageDropdown").classList.toggle("show");
         }
